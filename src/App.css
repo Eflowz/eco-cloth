@@ -1,6 +1,7 @@
 body {
     font-family: "Stint Ultra Condensed", serif;
     font-weight: 300;
+    font-size: 23px;
     padding: 20px;
     font-style: normal;
 }
@@ -8,4 +9,8 @@ body {
 a {
     text-decoration: none;
     color: black;
+}
+
+*{
+    box-sizing: border-box;
 }
