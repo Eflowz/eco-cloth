@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import {ReactComponent as Logo} from '../assets/crown.svg'
 import './header.styles.scss';
-import { auth } from "../../Firebase/firebase.utils";
+import { auth } from "../Firebase/firebase.utils";
 
 const Header = ({currentUser}) => (
 <div className="header">
