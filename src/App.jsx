@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import ShopPage from './pages/shop/shop.component';
-import {Routes, Route } from 'react-router-dom';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from './components/header/header.component';
 import Homepage from './pages/homepage/homepage.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import {auth, createUserProfileDocument, db, doc, getDoc} from  './components/Firebase/firebase.utils';
+import {auth, db, doc, getDoc} from  './components/Firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 
 class App extends React.Component {
@@ -33,7 +33,7 @@ class App extends React.Component {
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
-
+  
   render () {
     return (
       <div>
@@ -41,15 +41,32 @@ class App extends React.Component {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/shop" element={<ShopPage />} />
-            <Route path="/signin" element={<SignInAndSignUpPage />} />
+            <Route exact path="/signin" render={() => {
+              if (this.props.currentUser) {
+                const navigate = useNavigate();
+                navigate('/'); 
+      } else {
+        return (<SignInAndSignUpPage />);
+      }
+      return null; 
+    }} />
           </Routes>
       </div>
     );
   }
 }
 
+
+
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispatchToProps ) (App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+) (App);
