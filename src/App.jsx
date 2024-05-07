@@ -8,7 +8,6 @@ import Homepage from './pages/homepage/homepage.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import {auth, db, doc, getDoc} from  './components/Firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
-
 class App extends React.Component {
 
 
